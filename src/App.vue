@@ -22,7 +22,7 @@ export default {
     HelloWorld,
   },
   mounted() {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://fakestoreapi.com/products?limit=9")
       .then((res) => res.json())
       .then((data) => (this.res = data))
       .then((json) => console.log(json));

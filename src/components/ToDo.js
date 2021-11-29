@@ -1,6 +1,5 @@
 /**
- * bind api
- * output 9 products
+ *
  * add-to-cart-btn
  * function-add-to-cart
  * show amount of products in cart
