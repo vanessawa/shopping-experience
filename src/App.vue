@@ -43,7 +43,8 @@
         <img :src="item.image" class="card-img-top" alt="bild" />
         <div class="card-body">
           <h5 class="card-title">{{ item.title }}</h5>
-          <p class="card-text">{{ item.price }}</p>
+
+          <p class="card-text" v-text="parsePrice(item.price)"></p>
           <p class="card-text" v-text="item.category"></p>
           <div class="overflow-scroll" style="width: 15.5rem; height: 10rem">
             <p class="card-text" v-text="item.description"></p>
@@ -117,6 +118,13 @@ export default {
           e.stopPropagation();
         });
       });
+    },
+    parsePrice(price) {
+      var formatter = new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR",
+      });
+      return formatter.format(price);
     },
   },
 };
