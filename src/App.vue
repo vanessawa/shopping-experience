@@ -2,7 +2,8 @@
   <header>
     <div class="row">
       <div class="col-sm-4 bg-warning">
-        <Cart :cart="cart" />
+        <p class="card-text">{{ totalAmount }}</p>
+        <!-- <Cart :cart="cart" /> -->
       </div>
     </div>
   </header>
@@ -34,7 +35,7 @@
 </template>
 
 <script>
-import Cart from "@/components/Cart.vue";
+// import Cart from "@/components/Cart.vue";
 import _ from "lodash";
 export default {
   name: "App",
@@ -42,10 +43,11 @@ export default {
     return {
       res: {},
       cart: [],
+      totalAmount: "",
     };
   },
   components: {
-    Cart,
+    // Cart,
   },
   mounted() {
     console.log("start loading procuts...");
@@ -76,10 +78,7 @@ export default {
         console.log("cart empty, adding first item");
         this.cart.push({ item: item, amount: 1 });
       }
-    },
-    cartQuantity(item) {
-      let quantity = _.filter(this.cart, ["item.id", item.id]);
-      if (quantity[0]) return quantity[0].amount;
+      this.totalAmount++;
     },
   },
 };
