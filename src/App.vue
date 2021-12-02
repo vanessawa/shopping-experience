@@ -3,7 +3,6 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Shop-It</a>
       <button
-        @click="showCart"
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -22,7 +21,7 @@
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
               >
-                {{ totalAmount }}
+                {{ totalItems }}
               </span>
               <i class="bi bi-cart2"></i>
             </a>
@@ -35,7 +34,7 @@
       </div>
     </div>
   </nav>
-  <Cart :cart="cart" />
+
   <br />
   <div class="row">
     <div class="col-sm-4 g-3" v-for="item in res" :key="item.id">
@@ -57,7 +56,7 @@
             class="cart-btn btn btn-primary"
             @click="addToCart(item)"
             :id="item.id"
-            >In den Warenkorb</a
+            >Add to cart</a
           >
         </div>
       </div>
@@ -67,6 +66,7 @@
 
 <script>
 import Cart from "@/components/Cart.vue";
+//lodash library zum erweiterten Filtern von Arrays für Warenkorb
 import _ from "lodash";
 
 export default {
@@ -87,6 +87,20 @@ export default {
       .then((res) => res.json())
       .then((data) => (this.res = data));
     console.log("finished loading.");
+    //stop propagation
+    document.querySelectorAll(".dropdown-menu").forEach(function (element) {
+      element.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    });
+  },
+
+  computed: {
+    totalItems() {
+      let total = 0;
+      this.cart.forEach((cartItem) => (total += cartItem.amount));
+      return total;
+    },
   },
 
   methods: {
@@ -112,13 +126,7 @@ export default {
       }
       this.totalAmount++;
     },
-    showCart() {
-      document.querySelectorAll(".dropdown-menu").forEach(function (element) {
-        element.addEventListener("click", function (e) {
-          e.stopPropagation();
-        });
-      });
-    },
+
     parsePrice(price) {
       var formatter = new Intl.NumberFormat("de-DE", {
         style: "currency",
