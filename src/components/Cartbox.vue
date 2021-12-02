@@ -13,7 +13,7 @@
         v-text="parsePrice(cartItem.item.price * cartItem.amount)"
       ></span>
 
-      <button @click="deleteItem(cartItem)">
+      <button @click="deleteItem(cartItem, cart)">
         <i class="trashIcon bi bi-trash"></i>
       </button>
       <hr />
@@ -35,11 +35,11 @@ export default {
       });
       return formatter.format(price);
     },
-    deleteItem(item) {
-      let index = _.findIndex(this.cart, (Item) => {
+    deleteItem(item, cart) {
+      let index = _.findIndex(cart, (Item) => {
         return Item.item.id == item.item.id;
       });
-      this.cart.splice(index, 1);
+      cart.splice(index, 1);
     },
   },
   computed: {
@@ -56,7 +56,7 @@ export default {
 
 <style>
 .trashIcon {
-  background-color: purple;
+  background-color: hotpink;
   border: none;
 }
 </style>
