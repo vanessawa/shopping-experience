@@ -1,7 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-info bg-gradient m-0">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-info bg-gradient ps-5 pe-5"
+  >
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Shop-It</a>
+      <a class="navbar-brand" href="#"><h1>Shop-It</h1></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -23,10 +25,10 @@
               >
                 {{ totalItems }}
               </span>
-              <i class="bi bi-cart2"></i>
+              <i class="bi bi-cart2" style="font-size: 2rem"></i>
             </a>
             <div class="dropdown-menu dropdown-large dropdown-menu-end">
-              <Cart :cart="cart" />
+              <Cartbox :cart="cart" />
             </div>
             <!-- dropdown-large.// -->
           </li>
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import Cart from "@/components/Cart.vue";
+import Cartbox from "@/components/Cartbox.vue";
 //lodash library zum erweiterten Filtern von Arrays für Warenkorb
 import _ from "lodash";
 
@@ -79,7 +81,7 @@ export default {
     };
   },
   components: {
-    Cart,
+    Cartbox,
   },
   mounted() {
     console.log("start loading procuts...");
@@ -145,7 +147,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 3rem;
+  margin: 3rem 0;
 }
 
 .card-img-top {
@@ -157,15 +159,4 @@ export default {
 .card-text {
   margin-right: 0.5rem;
 }
-
-// .cartView {
-//   display: flex;
-//   position: relative;
-//   justify-self: flex-end;
-// }
-
-// aside {
-//   position: absolute;
-//   text-align: right;
-// }
 </style>

@@ -13,7 +13,9 @@
         v-text="parsePrice(cartItem.item.price * cartItem.amount)"
       ></span>
 
-      <button @click="deleteItem(cartItem)"><i class="bi bi-trash"></i></button>
+      <button @click="deleteItem(cartItem)">
+        <i class="trashIcon bi bi-trash"></i>
+      </button>
       <hr />
     </div>
 
@@ -51,3 +53,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.trashIcon {
+  background-color: purple;
+  border: none;
+}
+</style>
