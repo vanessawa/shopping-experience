@@ -63,7 +63,6 @@
 
 <script>
 import Cartbox from "@/components/Cartbox.vue";
-//lodash library zum erweiterten Filtern von Arrays für Warenkorb
 import _ from "lodash";
 
 export default {
@@ -79,12 +78,10 @@ export default {
     Cartbox,
   },
   mounted() {
-    console.log("start loading procuts...");
     fetch("https://fakestoreapi.com/products?limit=9")
       .then((res) => res.json())
       .then((data) => (this.res = data));
-    console.log("finished loading.");
-    //stop propagation
+
     document.querySelectorAll(".dropdown-menu").forEach(function (element) {
       element.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -102,18 +99,13 @@ export default {
 
   methods: {
     addToCart(item) {
-      //check if cart has 1 or more items in it
       if (this.cart && this.cart.length >= 1) {
-        //check if item is in the cart
         let itemInCart = _.filter(this.cart, ["item.id", item.id]);
-        //if item is not in the cart, push it to the cart-array
         if (itemInCart == 0) {
           this.cart.push({ item: item, amount: 1 });
-          //else: item is already in the cart, increase amount
         } else {
           itemInCart[0].amount++;
         }
-        //if cart is empty, push first item to cart-array
       } else {
         this.cart.push({ item: item, amount: 1 });
       }
@@ -137,7 +129,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin: 3rem 0;
 }
 
