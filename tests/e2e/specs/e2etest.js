@@ -10,4 +10,10 @@ describe("site access", () => {
       cy.contains("h1", "Shop-It");
     });
   });
+
+  describe("load api", () => {
+    it("loads the api", () => {
+      cy.request("https://fakestoreapi.com/products?limit=9");
+    });
+  });
 });
