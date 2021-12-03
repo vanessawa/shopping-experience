@@ -1,25 +1,28 @@
 <template>
   <div class="row m-1">
-    <div
-      class="cart-item"
-      style="width: 15rem"
-      v-for="cartItem in cart"
-      :key="cartItem.item.id"
-    >
-      <h6 class="card-title">{{ cartItem.item.title }}</h6>
-      <span class="card-text fw-lighter">{{ cartItem.amount }}x</span>
-      <span
-        class="card-text fw-lighter"
-        v-text="parsePrice(cartItem.item.price * cartItem.amount)"
-      ></span>
+    <div class="col-xs-4 col-md-6">
+      <div
+        class="cart-item"
+        style="width: 15rem"
+        v-for="cartItem in cart"
+        :key="cartItem.item.id"
+      >
+        <h6 class="card-title">{{ cartItem.item.title }}</h6>
+        <span class="card-text fw-lighter">{{ cartItem.amount }}x</span>
+        <span
+          class="card-text fw-lighter"
+          v-text="parsePrice(cartItem.item.price * cartItem.amount)"
+        ></span>
 
-      <button @click="deleteItem(cartItem, cart)">
-        <i class="trashIcon bi bi-trash"></i>
-      </button>
-      <hr />
+        <button class="trash float-end" @click="deleteItem(cartItem, cart)">
+          <i class="bi bi-trash"></i>
+        </button>
+        <hr class="dropdown-divider" />
+      </div>
+      <div>
+        <p>Total: {{ totalSum }}</p>
+      </div>
     </div>
-
-    <div class="card-footer">Total: {{ totalSum }}</div>
   </div>
 </template>
 
@@ -55,8 +58,8 @@ export default {
 </script>
 
 <style>
-.trashIcon {
-  background-color: hotpink;
+.trash {
+  background-color: white;
   border: none;
 }
 </style>

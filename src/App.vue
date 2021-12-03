@@ -1,18 +1,8 @@
 <template>
-  <nav
-    class="navbar navbar-expand-lg navbar-dark bg-info bg-gradient ps-5 pe-5"
-  >
+  <nav class="navbar navbar-expand navbar-dark bg-info bg-gradient ps-5 pe-5">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"><h1>Shop-It</h1></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#main_nav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="main_nav">
+      <div class="navbar-collapse justify-content-end" id="main_nav">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a
@@ -30,36 +20,41 @@
             <div class="dropdown-menu dropdown-large dropdown-menu-end">
               <Cartbox :cart="cart" />
             </div>
-            <!-- dropdown-large.// -->
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <br />
-  <div class="row">
+  <div class="row m-5 gy-3">
     <div class="col-sm-4 g-3" v-for="item in res" :key="item.id">
-      <div class="card" style="width: 18rem; height: 40rem">
-        <img :src="item.image" class="card-img-top" alt="bild" />
+      <div
+        class="eachCard card mb-3"
+        style="max-width: 18rem; min-height: 36rem"
+      >
+        <img :src="item.image" class="card-img-top mt-3" alt="bild" />
         <div class="card-body">
           <h5 class="card-title">{{ item.title }}</h5>
 
           <p class="card-text" v-text="parsePrice(item.price)"></p>
           <p class="card-text" v-text="item.category"></p>
-          <div class="overflow-scroll" style="width: 15.5rem; height: 10rem">
+          <div
+            class="overflow-scroll"
+            style="max-width: 15.5rem; height: 10rem"
+          >
             <p class="card-text" v-text="item.description"></p>
           </div>
           <br />
-        </div>
-        <div class="card-footer">
-          <a
-            href="#"
-            class="cart-btn btn btn-primary"
-            @click="addToCart(item)"
-            :id="item.id"
-            >Add to cart</a
-          >
+
+          <div class="card-footer">
+            <a
+              href="#"
+              class="cart-btn btn"
+              @click="addToCart(item)"
+              :id="item.id"
+              >Add to cart</a
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -113,17 +108,13 @@ export default {
         let itemInCart = _.filter(this.cart, ["item.id", item.id]);
         //if item is not in the cart, push it to the cart-array
         if (itemInCart == 0) {
-          console.log("not found in cart");
           this.cart.push({ item: item, amount: 1 });
           //else: item is already in the cart, increase amount
         } else {
-          console.log("found in cart, adding one");
           itemInCart[0].amount++;
-          console.log(itemInCart);
         }
         //if cart is empty, push first item to cart-array
       } else {
-        console.log("cart empty, adding first item");
         this.cart.push({ item: item, amount: 1 });
       }
       this.totalAmount++;
@@ -152,11 +143,29 @@ export default {
 
 .card-img-top {
   width: 100%;
-  height: 20vw;
+  height: 15vw;
   object-fit: contain;
 }
 
 .card-text {
   margin-right: 0.5rem;
+}
+
+.card-title {
+  height: 3ex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-title:hover {
+  height: auto;
+  white-space: pre-wrap;
+  overflow: visible;
+  text-overflow: overlay;
+}
+
+.cart-btn {
+  background-color: rgba(107, 181, 213, 0.687);
+  color: white;
 }
 </style>
